@@ -11,6 +11,7 @@ import { FormTag, Input, Label, Button } from './LoginForm.styled';
 const LoginForm = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [username, setUsername] = useState('');
 
   const dispatch = useDispatch();
   const isLoading = useSelector(selectAuthIsLoading);
@@ -18,10 +19,11 @@ const LoginForm = () => {
   const handleSubmit = e => {
     e.preventDefault();
 
-    dispatch(login({ email, password }));
+    dispatch(login({ username, email, password }));
 
     setEmail('');
     setPassword('');
+    setUsername('');
   };
 
   return (
@@ -32,6 +34,17 @@ const LoginForm = () => {
       >
         <>
           <FormTag onSubmit={handleSubmit}>
+            <Label>
+              <Input
+                type="text"
+                value={username}
+                name="name"
+                onChange={e => setUsername(e.target.value)}
+                placeholder="Name"
+                autoComplete="off"
+                required
+              />
+            </Label>
             <Label>
               <Input
                 type="email"

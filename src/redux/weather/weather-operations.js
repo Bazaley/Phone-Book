@@ -12,7 +12,7 @@ export const fetchWeather = createAsyncThunk(
       );
       return data;
     } catch (error) {
-      return rejectWithValue(error);
+      return rejectWithValue(error.response.data.message);
     }
   }
 );

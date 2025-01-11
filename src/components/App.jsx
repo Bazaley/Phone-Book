@@ -5,9 +5,15 @@ import { Routes, Route } from 'react-router-dom';
 import Layout from './Layout/Layout';
 import PrivateRoute from 'HOCs/PrivateRoute';
 import PublicRoute from 'HOCs/PublicRoute';
-import { selectIsFetchingCurrentUser, selectToken } from 'redux/selectors';
+import { selectIsFetchingCurrentUser } from 'redux/selectors';
 import { useSelector } from 'react-redux';
-import { fetchContacts } from 'redux/contacts/contacts-operations';
+import Parse from 'parse/dist/parse.min.js';
+
+Parse.initialize(
+  'Nvf2aIb8bo63eTcSuf5sdiWZJg5OkJd9FNSwjjcd',
+  'Dh8F8aiqQC43qt7qPNNm4FSrxumNtqvGs7JRyEQO'
+);
+Parse.serverURL = 'https://parseapi.back4app.com/';
 
 const Home = lazy(() => import('pages/Home/Home'));
 const AddContacts = lazy(() => import('pages/AddContacts/AddContacts'));
@@ -18,12 +24,10 @@ const Login = lazy(() => import('pages/Login/Login'));
 const App = () => {
   const dispatch = useDispatch();
   const isFetchingCurrentUser = useSelector(selectIsFetchingCurrentUser);
-  const token = useSelector(selectToken);
 
   useEffect(() => {
     dispatch(fetchCurrentUser());
-    if (token) dispatch(fetchContacts());
-  }, [dispatch, token]);
+  }, [dispatch]);
 
   return (
     <>

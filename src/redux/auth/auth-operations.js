@@ -1,41 +1,27 @@
-import axios from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
+import Parse from 'parse/dist/parse.min.js';
 
-axios.defaults.baseURL = 'https://connections-api.herokuapp.com';
+export const register = createAsyncThunk('auth/register', user => {
+  const token = user.getSessionToken();
+  const name = user.getUsername();
+  const email = user.getEmail();
+  const id = user._getId();
 
-const token = {
-  set(token) {
-    axios.defaults.headers.common.Authorization = `Bearer ${token}`;
-  },
-  unSet() {
-    axios.defaults.headers.common.Authorization = '';
-  },
-};
-
-export const register = createAsyncThunk(
-  'auth/register',
-  async (userData, { rejectWithValue }) => {
-    try {
-      const { data } = await axios.post('/users/signup', userData);
-
-      token.set(data.token);
-      return data;
-    } catch (error) {
-      return rejectWithValue('Bad Request');
-    }
-  }
-);
+  return { token, name, email, id };
+});
 
 export const login = createAsyncThunk(
   'auth/login',
 
-  async (user, { rejectWithValue }) => {
+  async ({ username, email, password }, { rejectWithValue }) => {
     try {
-      const { data } = await axios.post('users/login', user);
+      const user = await Parse.User.logIn(username, password, { email });
+      const userToken = user.getSessionToken();
+      const userName = user.getUsername();
+      const userEmail = user.getEmail();
+      const userId = user._getId();
 
-      token.set(data.token);
-
-      return data;
+      return { userName, userEmail, userToken, userId };
     } catch (error) {
       return rejectWithValue(error.response.status);
     }
@@ -46,8 +32,7 @@ export const logout = createAsyncThunk(
   'auth/logout',
   async (_, { rejectWithValue }) => {
     try {
-      await axios.post('users/logout');
-      token.unSet();
+      await Parse.User.logOut();
     } catch (error) {
       return rejectWithValue(error);
     }
@@ -56,17 +41,21 @@ export const logout = createAsyncThunk(
 
 export const fetchCurrentUser = createAsyncThunk(
   'auth/refresh',
-  async (_, { rejectWithValue, getState }) => {
-    const tokenLS = getState().auth.token;
-
-    if (!tokenLS) {
-      return rejectWithValue('Not Token');
-    }
-    token.set(tokenLS);
+  async (_, { rejectWithValue }) => {
     try {
-      const { data } = await axios('users/current');
+      const currentUser = await Parse.User.current();
 
-      return data;
+      if (!currentUser) {
+        // eslint-disable-next-line
+        throw 'NOT CURRENT USER';
+      }
+
+      const name = currentUser.getUsername();
+      const email = currentUser.getEmail();
+      const token = currentUser.getSessionToken();
+      const id = currentUser._getId();
+
+      return { name, email, token, id };
     } catch (error) {
       return rejectWithValue(error);
     }

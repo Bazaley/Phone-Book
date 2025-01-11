@@ -2,10 +2,11 @@ import React from 'react';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { fetchWeather } from 'redux/weather/weather-operations';
+
 import WeatherData from 'components/WeatherData/WeatherData';
 import { FormTag, Input, Label, Box } from './WeatherForm.styled';
-
 import { TiWeatherPartlySunny } from 'react-icons/ti';
+
 const WeatherForm = () => {
   const [city, setCity] = useState('');
 

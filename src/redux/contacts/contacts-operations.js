@@ -1,15 +1,17 @@
-import axios from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
+import Parse from 'parse/dist/parse.min.js';
 
 export const fetchContacts = createAsyncThunk(
   'contacts/fetchContacts',
-  async (_, { rejectWithValue }) => {
-    try {
-      const { data } = await axios(
-        'https://connections-api.herokuapp.com/contacts'
-      );
+  async (id, { rejectWithValue }) => {
+    const Contacts = new Parse.Query('Contacts');
 
-      return data;
+    Contacts.equalTo('owner', id);
+
+    try {
+      const results = await Contacts.find();
+
+      return results;
     } catch (error) {
       return rejectWithValue(error);
     }
@@ -18,14 +20,15 @@ export const fetchContacts = createAsyncThunk(
 
 export const addContact = createAsyncThunk(
   'contacts/addContact',
-  async (contact, { rejectWithValue }) => {
+  async ({ name, number, id }, { rejectWithValue }) => {
     try {
-      const { data } = await axios.post(
-        'https://connections-api.herokuapp.com/contacts',
-        contact
-      );
+      const Contacts = new Parse.Object('Contacts');
+      Contacts.set('name', name);
+      Contacts.set('phone', number);
+      Contacts.set('owner', id);
 
-      return data;
+      const contact = await Contacts.save();
+      return contact;
     } catch (error) {
       return rejectWithValue(error);
     }
@@ -34,13 +37,12 @@ export const addContact = createAsyncThunk(
 
 export const deleteContact = createAsyncThunk(
   'contacts/deleteContact',
-  async (id, { rejectWithValue }) => {
-    try {
-      await axios.delete(
-        `https://connections-api.herokuapp.com/contacts/${id}`
-      );
+  async (objectId, { rejectWithValue }) => {
+    const Contact = new Parse.Object('Contacts');
+    Contact.set('objectId', objectId);
 
-      return id;
+    try {
+      await Contact.destroy();
     } catch (error) {
       return rejectWithValue(error);
     }
@@ -49,14 +51,13 @@ export const deleteContact = createAsyncThunk(
 
 export const updateContact = createAsyncThunk(
   'contacts/updateContact',
-  async ({ id, name, number }, { rejectWithValue }) => {
+  async ({ objectId, name, phone }, { rejectWithValue }) => {
+    const Contact = new Parse.Object('Contacts');
+    Contact.set('objectId', objectId);
+    Contact.set('name', name);
+    Contact.set('phone', phone);
     try {
-      await axios.patch(
-        `https://connections-api.herokuapp.com/contacts/${id}`,
-        { name, number }
-      );
-
-      return { name, number, id };
+      await Contact.save();
     } catch (error) {
       return rejectWithValue(error);
     }

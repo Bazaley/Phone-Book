@@ -4,12 +4,12 @@ import { register } from 'redux/auth/auth-operations';
 import { Section } from 'components/Section/Section';
 import Particle from 'components/Particle/Particle';
 import { selectAuthIsLoading } from 'redux/selectors';
-
 import CircularProgress from '@mui/material/CircularProgress';
 import { FormTag, Input, Label, Button } from './RegisterForm.styled';
+import Parse from 'parse/dist/parse.min.js';
 
 const RegisterForm = () => {
-  const [name, setName] = useState('');
+  const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -19,7 +19,7 @@ const RegisterForm = () => {
   const handleChange = ({ target: { name, value } }) => {
     switch (name) {
       case 'name':
-        setName(value);
+        setUsername(value);
         break;
       case 'email':
         setEmail(value);
@@ -32,11 +32,19 @@ const RegisterForm = () => {
     }
   };
 
-  const handleSubmit = e => {
+  const handleSubmit = async e => {
     e.preventDefault();
 
-    dispatch(register({ name, email, password }));
-    setName('');
+    try {
+      const user = await Parse.User.signUp(username, password, {
+        email,
+      });
+      dispatch(register(user));
+    } catch (error) {
+      console.log(`Error! ${error}`);
+    }
+
+    setUsername('');
     setEmail('');
     setPassword('');
   };
@@ -48,7 +56,7 @@ const RegisterForm = () => {
           <Label>
             <Input
               type="text"
-              value={name}
+              value={username}
               name="name"
               onChange={handleChange}
               placeholder="Your Name"

@@ -2,13 +2,13 @@ import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { addContact } from 'redux/contacts/contacts-operations';
 import { selectContacts } from 'redux/selectors';
+import { selectUser } from 'redux/selectors';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import { FormTag, Input, Label, Button } from './AddContacts.styled';
 import { Navigate } from 'react-router-dom';
 import { Section } from 'components/Section/Section';
 import { selectIsLoading } from 'redux/selectors';
 import CircularProgress from '@mui/material/CircularProgress';
-
 import Particle from 'components/Particle/Particle';
 
 const Form = () => {
@@ -18,16 +18,21 @@ const Form = () => {
 
   const dispatch = useDispatch();
   const contacts = useSelector(selectContacts);
+
   const isLoading = useSelector(selectIsLoading);
+  const { id } = useSelector(selectUser);
+
   const handleSubmit = e => {
     e.preventDefault();
-    setIsSubmit(true);
 
-    contacts.some(contact => contact.name === name)
-      ? Notify.info(`${name} is already in contacts`, {
-          position: 'center-top',
-        })
-      : dispatch(addContact({ name, number }));
+    if (contacts.some(contact => contact.get('name') === name)) {
+      Notify.info(`${name} is already in contacts`, {
+        position: 'center-top',
+      });
+    } else {
+      dispatch(addContact({ name, number, id }));
+      setIsSubmit(true);
+    }
 
     setName('');
     setNumber('');
@@ -50,7 +55,7 @@ const Form = () => {
                 value={name}
                 onChange={e => setName(e.target.value)}
                 placeholder="Contact name"
-                pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
+                pattern="^[a-zA-Za-яА-Я]+(([' \-][a-zA-Za-яА-Я ])?[a-zA-Za-яА-Я]*)*"
                 title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
                 required
                 autoComplete="off"
@@ -63,7 +68,7 @@ const Form = () => {
                 value={number}
                 onChange={e => setNumber(e.target.value)}
                 placeholder="Contact phone"
-                pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
+                pattern="\+?\d{1,4}?[\-.\s]?\(?\d{1,3}?\)?[\-.\s]?\d{1,4}[\-.\s]?\d{1,4}[\-.\s]?\d{1,9}"
                 title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
                 required
                 autoComplete="off"
@@ -80,6 +85,7 @@ const Form = () => {
           </FormTag>
         </Section>
       )}
+
       <Particle />
     </>
   );

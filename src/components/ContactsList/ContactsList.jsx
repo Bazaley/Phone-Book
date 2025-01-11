@@ -1,6 +1,13 @@
 import { useSelector, useDispatch } from 'react-redux';
-import { selectFilterContact, selectContacts } from 'redux/selectors';
-import { deleteContact } from 'redux/contacts/contacts-operations';
+import {
+  selectFilterContact,
+  selectContacts,
+  selectUser,
+} from 'redux/selectors';
+import {
+  deleteContact,
+  fetchContacts,
+} from 'redux/contacts/contacts-operations';
 import {
   Button,
   Item,
@@ -14,16 +21,25 @@ import { Avatar } from '@mui/material';
 export const ContactsList = ({ setContact }) => {
   const contacts = useSelector(selectContacts);
   const filter = useSelector(selectFilterContact);
+  const { id } = useSelector(selectUser);
 
   const dispatch = useDispatch();
 
   return (
     <>
       {contacts
-        .filter(({ name }) => name.toLowerCase().includes(filter.toLowerCase()))
-        .map(({ id, name, number }) => {
+        .filter(contact => {
+          return contact
+            .get('name')
+            .toLowerCase()
+            .includes(filter.toLowerCase());
+        })
+        .map(contact => {
+          const objectId = contact._getId();
+          const name = contact.get('name');
+          const phone = contact.get('phone');
           return (
-            <Item key={id}>
+            <Item key={objectId}>
               <Avatar
                 sx={{
                   bgcolor: '#48d1cc',
@@ -32,17 +48,22 @@ export const ContactsList = ({ setContact }) => {
                 {name[0].toUpperCase()}
               </Avatar>
               <Paragraph>{name}</Paragraph>
-              <Paragraph>{number}</Paragraph>
+              <Paragraph>{phone}</Paragraph>
               <div>
                 <Button
                   rename
                   onClick={() => {
-                    setContact({ id, name, number });
+                    setContact({ objectId, name, phone });
                   }}
                 >
                   <GrUpdateStyled size={'20px'} />
                 </Button>
-                <Button onClick={() => dispatch(deleteContact(id))}>
+                <Button
+                  onClick={() => {
+                    dispatch(deleteContact(objectId));
+                    dispatch(fetchContacts(id));
+                  }}
+                >
                   <ImCrossStyled size={'20px'} />
                 </Button>
               </div>

@@ -26,15 +26,10 @@ const contactsSlice = createSlice({
         state.contacts.push(payload);
         state.isLoading = false;
       })
-      .addCase(deleteContact.fulfilled, (state, { payload }) => {
-        state.contacts = state.contacts.filter(({ id }) => id !== payload);
+      .addCase(deleteContact.fulfilled, state => {
         state.isLoading = false;
       })
       .addCase(updateContact.fulfilled, (state, { payload }) => {
-        const contactIndex = state.contacts.findIndex(
-          ({ id }) => id === payload.id
-        );
-        state.contacts[contactIndex] = payload;
         state.contactUpdate = null;
         state.isLoading = false;
       })
