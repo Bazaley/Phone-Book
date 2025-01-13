@@ -3,8 +3,10 @@ import { ImCross } from 'react-icons/im';
 import { RxUpdate } from 'react-icons/rx';
 
 export const Item = styled.li`
-  width: calc((100% - 60px) / 3);
+  width: 100%;
   display: flex;
+  flex-direction: column;
+  gap: 20px;
   justify-content: space-around;
   align-items: center;
   margin-bottom: 30px;
@@ -21,10 +23,6 @@ export const Item = styled.li`
     #00ced1
   );
   opacity: 0.9;
-
-  &:not(:nth-child(3n)) {
-    margin-right: 30px;
-  }
 `;
 
 export const Paragraph = styled.p`

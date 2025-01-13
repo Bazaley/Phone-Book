@@ -14,15 +14,16 @@ const authSlice = createSlice({
   initialState,
   extraReducers: builder => {
     builder
-      .addCase(
-        register.fulfilled,
-        (state, { payload: { token, name, email, id } }) => {
-          state.user = { name, email, id };
-          state.token = token;
-          state.isLoading = false;
-          state.error = null;
-        }
-      )
+      .addCase(register.fulfilled, (state, { payload }) => {
+        const token = payload?.getSessionToken();
+        const name = payload?.getUsername();
+        const email = payload?.getEmail();
+        const id = payload?._getId();
+        state.user = { name, email, id };
+        state.token = token;
+        state.isLoading = false;
+        state.error = null;
+      })
       .addCase(register.rejected, (state, { payload }) => {
         state.error = payload;
         state.isLoading = false;
@@ -64,8 +65,7 @@ const authSlice = createSlice({
           state.error = null;
         }
       )
-      .addCase(fetchCurrentUser.rejected, (state, { payload }) => {
-        state.error = payload;
+      .addCase(fetchCurrentUser.rejected, state => {
         state.isLoading = false;
         state.isFetchingCurrentUser = false;
       })

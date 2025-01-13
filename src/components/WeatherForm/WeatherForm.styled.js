@@ -1,10 +1,8 @@
 import styled from 'styled-components';
 
 export const Box = styled.div`
-  width: 400px;
   min-height: 250px;
   padding: 30px 20px 20px;
-
   background: linear-gradient(
     130deg,
     #008080,
@@ -19,13 +17,12 @@ export const Box = styled.div`
 `;
 
 export const FormTag = styled.form`
-  width: 400px;
   margin: 0 auto;
 `;
 
 export const Input = styled.input`
   display: block;
-  width: 400px;
+  width: 100%;
   height: 23px;
   border: none;
   border-bottom: 1px solid black;

@@ -6,19 +6,15 @@ const Navigation = () => {
   const token = useSelector(selectToken);
 
   return (
-    <nav>
-      <List>
-        <Item>
-          <NavLinkStyled to="/">Home</NavLinkStyled>
-        </Item>
-        <Item>
-          {token && <NavLinkStyled to="/addContact">Add Contact</NavLinkStyled>}
-        </Item>
-        <Item>
-          {token && <NavLinkStyled to="/contacts">Contacts</NavLinkStyled>}
-        </Item>
-      </List>
-    </nav>
+    <List>
+      <Item>
+        <NavLinkStyled to="/addContact">Add Contact</NavLinkStyled>
+      </Item>
+
+      <Item>
+        <NavLinkStyled to="/contacts">Contacts</NavLinkStyled>
+      </Item>
+    </List>
   );
 };
 

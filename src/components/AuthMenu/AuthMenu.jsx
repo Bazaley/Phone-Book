@@ -5,6 +5,7 @@ import { Avatar } from '@mui/material';
 import { Box, Paragraph, Button } from './AuthMenu.styled';
 import { selectAuthIsLoading } from 'redux/selectors';
 import CircularProgress from '@mui/material/CircularProgress';
+import Navigation from 'components/Navigation/Navigation';
 
 const AuthMenu = () => {
   const dispatch = useDispatch();
@@ -13,6 +14,7 @@ const AuthMenu = () => {
 
   return (
     <Box>
+      <Navigation />
       <Paragraph>{`Welcome,  ${user?.name}`}</Paragraph>
       <Avatar sx={{ bgcolor: '#48d1cc' }}>{user?.name[0]}</Avatar>
       <Button onClick={() => dispatch(logout())}>

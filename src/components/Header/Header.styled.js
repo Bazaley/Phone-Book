@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { NavLink } from 'react-router-dom';
 
 export const HeaderStyled = styled.header`
   padding: 20px 0;
@@ -10,4 +11,23 @@ export const HeaderStyled = styled.header`
 export const Box = styled.div`
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
+`;
+
+export const NavLinkStyled = styled(NavLink)`
+  font-size: 18px;
+  font-weight: 600;
+  color: black;
+  &.active {
+    text-shadow: 2px 1px white;
+  }
+
+  &.active::after {
+    display: block;
+    content: '';
+    background-color: white;
+    width: 100%;
+    height: 2px;
+    border-radius: 4px;
+  }
 `;

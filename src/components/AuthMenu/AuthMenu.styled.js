@@ -3,18 +3,21 @@ import styled from 'styled-components';
 export const Box = styled.div`
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
+  justify-content: space-around;
   margin-left: auto;
+  gap: 20px;
 `;
 
 export const Paragraph = styled.p`
-  margin-right: 20px;
+  /* margin-right: 20px; */
   font-size: 18px;
   font-weight: 600;
 `;
 
 export const Button = styled.button`
   display: block;
-  margin-left: 20px;
+  /* margin-left: 20px; */
   background-color: transparent;
   font-size: 15px;
   font-weight: 600;

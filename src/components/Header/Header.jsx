@@ -1,12 +1,10 @@
-import React from 'react';
-import Navigation from 'components/Navigation/Navigation';
 import Container from 'components/Container/Container';
 import AuthNav from 'components/AuthNav/AuthNav';
 import { useSelector } from 'react-redux';
 import { selectToken } from 'redux/selectors';
 import AuthMenu from 'components/AuthMenu/AuthMenu';
 
-import { HeaderStyled, Box } from './Header.styled';
+import { HeaderStyled, Box, NavLinkStyled } from './Header.styled';
 
 const Header = () => {
   const token = useSelector(selectToken);
@@ -14,7 +12,7 @@ const Header = () => {
     <HeaderStyled>
       <Container>
         <Box>
-          <Navigation />
+          <NavLinkStyled to="/">Home</NavLinkStyled>
           {token ? <AuthMenu /> : <AuthNav />}
         </Box>
       </Container>

@@ -1,14 +1,19 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import Parse from 'parse/dist/parse.min.js';
 
-export const register = createAsyncThunk('auth/register', user => {
-  const token = user.getSessionToken();
-  const name = user.getUsername();
-  const email = user.getEmail();
-  const id = user._getId();
-
-  return { token, name, email, id };
-});
+export const register = createAsyncThunk(
+  'auth/register',
+  async ({ username, email, password }, { rejectWithValue }) => {
+    try {
+      const user = await Parse.User.signUp(username, password, {
+        email,
+      });
+      return user;
+    } catch (error) {
+      return rejectWithValue(error.code);
+    }
+  }
+);
 
 export const login = createAsyncThunk(
   'auth/login',
@@ -23,7 +28,7 @@ export const login = createAsyncThunk(
 
       return { userName, userEmail, userToken, userId };
     } catch (error) {
-      return rejectWithValue(error.response.status);
+      return rejectWithValue(error.code);
     }
   }
 );

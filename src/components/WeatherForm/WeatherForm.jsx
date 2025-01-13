@@ -1,4 +1,3 @@
-import React from 'react';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { fetchWeather } from 'redux/weather/weather-operations';
@@ -17,24 +16,22 @@ const WeatherForm = () => {
     dispatch(fetchWeather(city));
   };
   return (
-    <>
-      <Box>
-        <FormTag onSubmit={handleSubmit}>
-          <Label>
-            Weather <TiWeatherPartlySunny size={'30'} />
-          </Label>
-          <Input
-            type="text"
-            value={city}
-            name="text"
-            onChange={e => setCity(e.target.value)}
-            placeholder="Input Your City"
-            autoComplete="off"
-          />
-        </FormTag>
-        <WeatherData />
-      </Box>
-    </>
+    <Box>
+      <FormTag onSubmit={handleSubmit}>
+        <Label>
+          Weather <TiWeatherPartlySunny size={'30'} />
+        </Label>
+        <Input
+          type="text"
+          value={city}
+          name="text"
+          onChange={e => setCity(e.target.value)}
+          placeholder="Input Your City"
+          autoComplete="off"
+        />
+      </FormTag>
+      <WeatherData />
+    </Box>
   );
 };
 

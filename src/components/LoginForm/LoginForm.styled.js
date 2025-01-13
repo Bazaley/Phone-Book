@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 
 const FormTag = styled.form`
-  width: 400px;
   margin: 0 auto;
   padding: 30px 20px 20px;
   border-radius: 4px;
@@ -20,7 +19,7 @@ const FormTag = styled.form`
 
 const Input = styled.input`
   display: block;
-  width: 400px;
+  width: 100%;
   height: 23px;
   border: none;
   border-bottom: 1px solid black;
@@ -28,11 +27,11 @@ const Input = styled.input`
   outline: none;
   background-color: transparent;
   font-family: Acme;
-  font-size: 22px;
+  font-size: 19px;
 
   &::placeholder {
     font-family: Acme;
-    font-size: 21px;
+    font-size: 19px;
     color: black;
   }
 `;
@@ -47,7 +46,7 @@ const Button = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 199px;
+  width: 100%;
   height: 35px;
   margin: 0 auto;
 

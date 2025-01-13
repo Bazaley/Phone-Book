@@ -1,13 +1,15 @@
 import PropTypes from 'prop-types';
-
+import Container from 'components/Container/Container';
 import { SectionTag, TitleStyled } from './Section.styled';
 
 export const Section = ({ title, children }) => {
   return (
     <SectionTag>
-      {title && <TitleStyled>{title}</TitleStyled>}
+      <Container>
+        {title && <TitleStyled>{title}</TitleStyled>}
 
-      {children}
+        {children}
+      </Container>
     </SectionTag>
   );
 };

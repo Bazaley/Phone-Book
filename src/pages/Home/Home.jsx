@@ -8,19 +8,15 @@ import { Box, Paragraph } from './Home.styled';
 const Home = () => {
   return (
     <Section title="Welcome to your personal contact book">
-      <>
-        <Box>
-          <div>
-            <WeatherForm />
-          </div>
+      <Box>
+        <Paragraph>
+          Create your unique account or use the login button to access your
+          contact book
+        </Paragraph>
 
-          <Paragraph>
-            Create your unique account or use the login button to access your
-            contact book
-          </Paragraph>
-        </Box>
-        <Particle />
-      </>
+        <WeatherForm />
+      </Box>
+      <Particle />
     </Section>
   );
 };

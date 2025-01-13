@@ -18,6 +18,7 @@ export const store = configureStore({
           'contacts/fetchContacts/fulfilled',
           'auth/login/fulfilled',
           'contacts/addContact/fulfilled',
+          'auth/register/fulfilled',
         ],
         ignoredPaths: ['contacts.contacts'],
       },
