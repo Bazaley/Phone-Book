@@ -1,19 +1,15 @@
-import { selectToken } from 'redux/selectors';
-import { useSelector } from 'react-redux';
-import { List, Item, NavLinkStyled } from './Navigation.styled';
+import { List, NavLinkStyled } from './Navigation.styled';
 
 const Navigation = () => {
-  const token = useSelector(selectToken);
-
   return (
     <List>
-      <Item>
+      <li>
         <NavLinkStyled to="/addContact">Add Contact</NavLinkStyled>
-      </Item>
+      </li>
 
-      <Item>
+      <li>
         <NavLinkStyled to="/contacts">Contacts</NavLinkStyled>
-      </Item>
+      </li>
     </List>
   );
 };

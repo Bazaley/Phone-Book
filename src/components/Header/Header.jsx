@@ -11,7 +11,7 @@ const Header = () => {
   return (
     <HeaderStyled>
       <Container>
-        <Box>
+        <Box style={token ? null : { flexDirection: 'row' }}>
           <NavLinkStyled to="/">Home</NavLinkStyled>
           {token ? <AuthMenu /> : <AuthNav />}
         </Box>

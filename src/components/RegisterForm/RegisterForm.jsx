@@ -43,49 +43,51 @@ const RegisterForm = () => {
 
   return (
     <Section title="Register and get access to personal data">
-      <FormTag onSubmit={handleSubmit}>
-        <Label>
-          <Input
-            type="text"
-            value={username}
-            name="name"
-            onChange={handleChange}
-            placeholder="Your Name"
-            autoComplete="off"
-            required
-          />
-        </Label>
-        <Label>
-          <Input
-            type="email"
-            value={email}
-            name="email"
-            onChange={handleChange}
-            placeholder="Email"
-            autoComplete="off"
-            required
-          />
-        </Label>
-        <Label>
-          <Input
-            type="password"
-            value={password}
-            name="password"
-            onChange={handleChange}
-            placeholder="Password"
-            autoComplete="off"
-            required
-          />
-        </Label>
-        <Button disabled={isLoading}>
-          {isLoading ? (
-            <CircularProgress size={19} style={{ color: 'white' }} />
-          ) : (
-            'Sign up'
-          )}
-        </Button>
-      </FormTag>
-      <Particle />
+      <>
+        <FormTag onSubmit={handleSubmit}>
+          <Label>
+            <Input
+              type="text"
+              value={username}
+              name="name"
+              onChange={handleChange}
+              placeholder="Your Name"
+              autoComplete="off"
+              required
+            />
+          </Label>
+          <Label>
+            <Input
+              type="email"
+              value={email}
+              name="email"
+              onChange={handleChange}
+              placeholder="Email"
+              autoComplete="off"
+              required
+            />
+          </Label>
+          <Label>
+            <Input
+              type="password"
+              value={password}
+              name="password"
+              onChange={handleChange}
+              placeholder="Password"
+              autoComplete="off"
+              required
+            />
+          </Label>
+          <Button disabled={isLoading}>
+            {isLoading ? (
+              <CircularProgress size={19} style={{ color: 'white' }} />
+            ) : (
+              'Sign up'
+            )}
+          </Button>
+        </FormTag>
+        <Particle />
+      </>
     </Section>
   );
 };

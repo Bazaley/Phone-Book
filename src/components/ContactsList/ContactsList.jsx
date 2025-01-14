@@ -20,6 +20,7 @@ import { Avatar } from '@mui/material';
 
 export const ContactsList = ({ setContact }) => {
   const contacts = useSelector(selectContacts);
+
   const filter = useSelector(selectFilterContact);
   const { id } = useSelector(selectUser);
 
@@ -61,7 +62,9 @@ export const ContactsList = ({ setContact }) => {
                 <Button
                   onClick={() => {
                     dispatch(deleteContact(objectId));
-                    dispatch(fetchContacts(id));
+                    setTimeout(() => {
+                      dispatch(fetchContacts(id));
+                    }, 500);
                   }}
                 >
                   <ImCrossStyled size={'20px'} />

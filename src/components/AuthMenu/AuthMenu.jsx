@@ -2,7 +2,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { selectUser } from 'redux/selectors';
 import { logout } from 'redux/auth/auth-operations';
 import { Avatar } from '@mui/material';
-import { Box, Paragraph, Button } from './AuthMenu.styled';
+import { Box, Paragraph, Button, UserBox } from './AuthMenu.styled';
 import { selectAuthIsLoading } from 'redux/selectors';
 import CircularProgress from '@mui/material/CircularProgress';
 import Navigation from 'components/Navigation/Navigation';
@@ -15,15 +15,17 @@ const AuthMenu = () => {
   return (
     <Box>
       <Navigation />
-      <Paragraph>{`Welcome,  ${user?.name}`}</Paragraph>
-      <Avatar sx={{ bgcolor: '#48d1cc' }}>{user?.name[0]}</Avatar>
-      <Button onClick={() => dispatch(logout())}>
-        {isLoading ? (
-          <CircularProgress size={19} style={{ color: 'white' }} />
-        ) : (
-          'Logout'
-        )}
-      </Button>
+      <UserBox>
+        <Paragraph>{`Welcome,  ${user?.name}`}</Paragraph>
+        <Avatar sx={{ bgcolor: '#48d1cc' }}>{user?.name[0]}</Avatar>
+        <Button onClick={() => dispatch(logout())}>
+          {isLoading ? (
+            <CircularProgress size={19} style={{ color: 'white' }} />
+          ) : (
+            'Logout'
+          )}
+        </Button>
+      </UserBox>
     </Box>
   );
 };

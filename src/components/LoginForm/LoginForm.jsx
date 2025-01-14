@@ -32,50 +32,52 @@ const LoginForm = () => {
         title="
     Enter your details and get access to your personal contact book"
       >
-        <FormTag onSubmit={handleSubmit}>
-          <Label>
-            <Input
-              type="text"
-              value={username}
-              name="name"
-              onChange={e => setUsername(e.target.value)}
-              placeholder="Name"
-              autoComplete="off"
-              required
-            />
-          </Label>
-          <Label>
-            <Input
-              type="email"
-              value={email}
-              name="email"
-              onChange={e => setEmail(e.target.value)}
-              placeholder="Email"
-              autoComplete="off"
-              required
-            />
-          </Label>
-          <Label>
-            <Input
-              type="password"
-              value={password}
-              name="password"
-              onChange={e => setPassword(e.target.value)}
-              placeholder="Password"
-              autoComplete="off"
-              required
-            />
-          </Label>
+        <>
+          <FormTag onSubmit={handleSubmit}>
+            <Label>
+              <Input
+                type="text"
+                value={username}
+                name="name"
+                onChange={e => setUsername(e.target.value)}
+                placeholder="Name"
+                autoComplete="off"
+                required
+              />
+            </Label>
+            <Label>
+              <Input
+                type="email"
+                value={email}
+                name="email"
+                onChange={e => setEmail(e.target.value)}
+                placeholder="Email"
+                autoComplete="off"
+                required
+              />
+            </Label>
+            <Label>
+              <Input
+                type="password"
+                value={password}
+                name="password"
+                onChange={e => setPassword(e.target.value)}
+                placeholder="Password"
+                autoComplete="off"
+                required
+              />
+            </Label>
 
-          <Button disabled={isLoading}>
-            {isLoading ? (
-              <CircularProgress size={19} style={{ color: 'white' }} />
-            ) : (
-              'Sign in'
-            )}
-          </Button>
-        </FormTag>
-        <Particle />
+            <Button disabled={isLoading}>
+              {isLoading ? (
+                <CircularProgress size={19} style={{ color: 'white' }} />
+              ) : (
+                'Sign in'
+              )}
+            </Button>
+          </FormTag>
+          <Particle />
+        </>
       </Section>
     </>
   );

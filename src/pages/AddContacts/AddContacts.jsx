@@ -10,6 +10,7 @@ import { Section } from 'components/Section/Section';
 import { selectIsLoading } from 'redux/selectors';
 import CircularProgress from '@mui/material/CircularProgress';
 import Particle from 'components/Particle/Particle';
+import { useMask } from '@react-input/mask';
 
 const Form = () => {
   const [name, setName] = useState('');
@@ -21,6 +22,11 @@ const Form = () => {
 
   const isLoading = useSelector(selectIsLoading);
   const { id } = useSelector(selectUser);
+
+  const inputRef = useMask({
+    mask: '(___) ___-__-__',
+    replacement: { _: /\d/ },
+  });
 
   const handleSubmit = e => {
     e.preventDefault();
@@ -61,15 +67,15 @@ const Form = () => {
                 autoComplete="off"
               />
             </Label>
+
             <Label>
               <Input
                 type="tel"
                 name="number"
                 value={number}
+                ref={inputRef}
                 onChange={e => setNumber(e.target.value)}
-                placeholder="Contact phone"
-                pattern="\+?\d{1,4}?[\-.\s]?\(?\d{1,3}?\)?[\-.\s]?\d{1,4}[\-.\s]?\d{1,4}[\-.\s]?\d{1,9}"
-                title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
+                placeholder="(123) 456-78-90"
                 required
                 autoComplete="off"
               />

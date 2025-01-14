@@ -5,11 +5,7 @@ export const List = styled.ul`
   display: flex;
   width: 100%;
   justify-content: center;
-  gap: 10px;
-`;
-
-export const Item = styled.li`
-  gap: 10px;
+  gap: 50px;
 `;
 
 export const NavLinkStyled = styled(NavLink)`

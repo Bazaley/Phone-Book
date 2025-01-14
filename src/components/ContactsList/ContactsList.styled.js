@@ -9,7 +9,6 @@ export const Item = styled.li`
   gap: 20px;
   justify-content: space-around;
   align-items: center;
-  margin-bottom: 30px;
   padding: 20px 0;
   border: 2px solid gray;
   border-radius: 4px;
@@ -23,6 +22,10 @@ export const Item = styled.li`
     #00ced1
   );
   opacity: 0.9;
+
+  @media screen and (min-width: 767px) {
+    width: calc((100% - 90px) / 4);
+  }
 `;
 
 export const Paragraph = styled.p`

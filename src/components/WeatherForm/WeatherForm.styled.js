@@ -14,6 +14,10 @@ export const Box = styled.div`
   opacity: 0.9;
   box-shadow: 5px 5px 16px #756a6a;
   border-radius: 4px;
+
+  @media screen and (min-width: 1200px) {
+    min-width: 500px;
+  }
 `;
 
 export const FormTag = styled.form`
