@@ -2,7 +2,7 @@ import Backdrop from '@mui/material/Backdrop';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { updateContact } from 'redux/contacts/contacts-operations';
-
+import { useMask } from '@react-input/mask';
 import { FormTag, Input, Label, ButtonForm } from './UpdateContact.styled';
 
 const UpdateContact = ({ contact, setContact }) => {
@@ -12,6 +12,11 @@ const UpdateContact = ({ contact, setContact }) => {
   const [objectId] = useState(contact.objectId);
 
   const dispatch = useDispatch();
+
+  const inputRef = useMask({
+    mask: '(___) ___-__-__',
+    replacement: { _: /\d/ },
+  });
 
   const handleSubmit = e => {
     e.preventDefault();
@@ -49,10 +54,9 @@ const UpdateContact = ({ contact, setContact }) => {
             type="tel"
             name="number"
             value={phone}
+            ref={inputRef}
             onChange={e => setPhone(e.target.value)}
-            placeholder="Contact phone"
-            pattern="\+?\d{1,4}?[\-.\s]?\(?\d{1,3}?\)?[\-.\s]?\d{1,4}[\-.\s]?\d{1,4}[\-.\s]?\d{1,9}"
-            title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
+            placeholder="(123) 456-78-90"
             required
             autoComplete="off"
           />
