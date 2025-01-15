@@ -34,9 +34,9 @@ export const Paragraph = styled.p`
 
 export const Button = styled.button`
   background-color: transparent;
-
   border: none;
   cursor: pointer;
+
   &:not(:last-child) {
     margin-right: 10px;
   }

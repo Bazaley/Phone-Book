@@ -6,7 +6,7 @@ import Particle from 'components/Particle/Particle';
 import { selectAuthIsLoading } from 'redux/selectors';
 import CircularProgress from '@mui/material/CircularProgress';
 
-import { FormTag, Input, Label, Button } from './LoginForm.styled';
+import { FormTag, Input, Label, Button } from '../RegisterForm/Form.styled';
 
 const LoginForm = () => {
   const [email, setEmail] = useState('');

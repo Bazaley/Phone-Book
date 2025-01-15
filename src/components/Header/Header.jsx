@@ -8,6 +8,7 @@ import { HeaderStyled, Box, NavLinkStyled } from './Header.styled';
 
 const Header = () => {
   const token = useSelector(selectToken);
+
   return (
     <HeaderStyled>
       <Container>

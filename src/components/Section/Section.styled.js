@@ -9,4 +9,9 @@ export const TitleStyled = styled.h1`
   font-size: 25px;
   margin-bottom: 20px;
   text-shadow: 2px 1px white;
+
+  @media screen and (min-width: 1200px) {
+    margin-bottom: 40px;
+    font-size: 30px;
+  }
 `;

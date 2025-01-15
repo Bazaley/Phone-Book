@@ -6,7 +6,6 @@ export const FormTag = styled.form`
   left: 50%;
   transform: translate(-50%, -50%);
   width: 400px;
-
   padding: 30px 20px 20px;
   border-radius: 4px;
   box-shadow: 5px 5px 16px #756a6a;
@@ -25,6 +24,7 @@ export const Input = styled.input`
   background-color: transparent;
   font-family: Acme;
   font-size: 22px;
+
   &::placeholder {
     font-family: Acme;
     font-size: 21px;
@@ -34,7 +34,6 @@ export const Input = styled.input`
 
 export const Label = styled.label`
   display: block;
-
   margin-bottom: 45px;
 `;
 

@@ -2,7 +2,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { selectUser } from 'redux/selectors';
 import { logout } from 'redux/auth/auth-operations';
 import { Avatar } from '@mui/material';
-import { Box, Paragraph, Button, UserBox } from './AuthMenu.styled';
+import { Box, Paragraph, Button, UserBox, Span } from './AuthMenu.styled';
 import { selectAuthIsLoading } from 'redux/selectors';
 import CircularProgress from '@mui/material/CircularProgress';
 import Navigation from 'components/Navigation/Navigation';
@@ -16,8 +16,12 @@ const AuthMenu = () => {
     <Box>
       <Navigation />
       <UserBox>
-        <Paragraph>{`Welcome,  ${user?.name}`}</Paragraph>
-        <Avatar sx={{ bgcolor: '#48d1cc' }}>{user?.name[0]}</Avatar>
+        <Paragraph>
+          Welcome, <Span>{user?.name}</Span>
+        </Paragraph>
+        <Avatar sx={{ bgcolor: '#48d1cc' }}>
+          {user?.name[0].toUpperCase()}
+        </Avatar>
         <Button onClick={() => dispatch(logout())}>
           {isLoading ? (
             <CircularProgress size={19} style={{ color: 'white' }} />

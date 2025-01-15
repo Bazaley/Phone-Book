@@ -5,7 +5,7 @@ import { Section } from 'components/Section/Section';
 import Particle from 'components/Particle/Particle';
 import { selectAuthIsLoading } from 'redux/selectors';
 import CircularProgress from '@mui/material/CircularProgress';
-import { FormTag, Input, Label, Button } from './RegisterForm.styled';
+import { FormTag, Input, Label, Button } from './Form.styled';
 
 const RegisterForm = () => {
   const [username, setUsername] = useState('');

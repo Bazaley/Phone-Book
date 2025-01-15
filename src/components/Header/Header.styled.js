@@ -19,12 +19,12 @@ export const Box = styled.div`
 
 export const NavLinkStyled = styled(NavLink)`
   margin-right: auto;
-
   font-size: 18px;
   font-weight: 600;
   color: black;
+
   &.active {
-    text-shadow: 2px 1px white;
+    text-shadow: 0px 1px white;
   }
 
   &.active::after {
@@ -34,5 +34,9 @@ export const NavLinkStyled = styled(NavLink)`
     width: 100%;
     height: 2px;
     border-radius: 4px;
+  }
+
+  @media screen and (min-width: 1200px) {
+    font-size: 22px;
   }
 `;

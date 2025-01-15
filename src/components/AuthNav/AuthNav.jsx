@@ -1,15 +1,15 @@
 import React from 'react';
 
-import { List, Item, NavLinkStyled } from './AuthNav.styled';
+import { List, NavLinkStyled } from './AuthNav.styled';
 const AuthNav = () => {
   return (
     <List>
-      <Item>
+      <li>
         <NavLinkStyled to="/login">Sign in</NavLinkStyled>
-      </Item>
-      <Item>
+      </li>
+      <li>
         <NavLinkStyled to="/register">Sign up</NavLinkStyled>
-      </Item>
+      </li>
     </List>
   );
 };

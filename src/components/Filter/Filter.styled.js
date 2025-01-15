@@ -1,12 +1,12 @@
 import styled from 'styled-components';
 
-const Span = styled.span`
+export const Span = styled.span`
   display: block;
   margin-bottom: 10px;
   font-size: 20px;
 `;
 
-const Input = styled.input`
+export const Input = styled.input`
   display: block;
   margin: 0 auto;
   width: 300px;
@@ -16,5 +16,3 @@ const Input = styled.input`
   border-radius: 10px;
   text-align: center;
 `;
-
-export { Span, Input };

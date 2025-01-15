@@ -4,7 +4,12 @@ import { addContact } from 'redux/contacts/contacts-operations';
 import { selectContacts } from 'redux/selectors';
 import { selectUser } from 'redux/selectors';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
-import { FormTag, Input, Label, Button } from './AddContacts.styled';
+import {
+  FormTag,
+  Input,
+  Label,
+  Button,
+} from '../../components/RegisterForm/Form.styled';
 import { Navigate } from 'react-router-dom';
 import { Section } from 'components/Section/Section';
 import { selectIsLoading } from 'redux/selectors';
